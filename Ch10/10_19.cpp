@@ -17,10 +17,13 @@ void biggies(std::vector<std::string>& vs, std::size_t sz)
     elimdups(vs);
 
     //! sort by size, but maintain alphabetical order for same size.
-    
+    std::stable_sort(vs.begin(), vs.end(),
+                     [](string const& lhs, string const& rhs) {
+                         return lhs.size() < rhs.size();
+                     });
 
     //! get an iterator to the first one whose size() is >= sz
-    auto wc = partition(vs.begin(), vs.end(),
+    auto wc = stable_partition(vs.begin(), vs.end(),
                            [sz](string const& s) { return s.size() >= sz; });
 
     std::stable_sort(vs.begin(), wc,
