@@ -1,48 +1,24 @@
-#include <string>
-using std::string;
+#include<iostream>
+#include<string>
 
-#include <iostream>
+using namespace::std;
 
-void Replace(string& s, const string& oldVal, const string& newVal)
-{
-    for (auto beg = s.begin(); std::distance(beg, s.end()) >=
-                               std::distance(oldVal.begin(), oldVal.end());) {
-        if (string{beg, beg + oldVal.size()} == oldVal) {
-            beg = s.erase(beg, beg + oldVal.size());
-            beg = s.insert(beg, newVal.cbegin(), newVal.cend());
-            std::advance(beg, newVal.size());
+void Replace(string& s, const string& a, const string& b){
+    
+    for(auto iter = s.begin();distance(iter,s.end())>=distance(a.begin(),a.end());){
+        if(string(iter,iter+a.size()) == a){
+            iter = s.erase(iter,iter+a.size());
+            iter = s.insert(iter, b.begin(),b.end());
+            advance(iter,b.size());
         }
         else
-            ++beg;
+            ++iter;
     }
 }
-
-int main()
-{
-    {
-        string str{"To drive straight thru is a foolish, tho courageous act."};
-        Replace(str, "thru", "through");
-        Replace(str, "tho", "though");
-        std::cout << str << std::endl;
-    }
-    {
-        string str{
-            "To drive straight thruthru is a foolish, thotho courageous act."};
-        Replace(str, "thru", "through");
-        Replace(str, "tho", "though");
-        std::cout << str << std::endl;
-    }
-    {
-        string str{"To drive straight thru is a foolish, tho courageous act."};
-        Replace(str, "thru", "thruthru");
-        Replace(str, "tho", "though");
-        std::cout << str << std::endl;
-    }
-    {
-        string str{"my world is a big world"};
-        Replace(str, "world",
-                "worldddddddddddddddddddddddddddddddddddddddddddddddd");
-        std::cout << str << std::endl;
-    }
+int main(){
+    string a = "altho you have the power,  tho you still need to go thru thru thru it.";
+    Replace(a,"tho","though");
+    Replace(a,"thru","through");
+    cout << a << endl;
     return 0;
 }
