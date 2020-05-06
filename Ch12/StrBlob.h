@@ -1,15 +1,24 @@
+#ifndef CP5_ex12_19_h
+#define CP5_ex12_19_h
+
 #include <vector>
 #include <string>
 #include <initializer_list>
 #include <memory>
-#include <exception>
+#include <stdexcept>
 
 using std::vector;
 using std::string;
 
+class StrBlobPtr;
+
 class StrBlob {
 public:
     using size_type = vector<string>::size_type;
+    friend class StrBlobPtr;
+
+    StrBlobPtr begin() { return StrBlobPtr(*this); };
+    StrBlobPtr end() { return StrBlobPtr(*this, data->size()); };
 
     StrBlob() : data(std::make_shared<vector<string>>()) {}
     StrBlob(std::initializer_list<string> il)
@@ -59,3 +68,36 @@ private:
 private:
     std::shared_ptr<vector<string>> data;
 };
+
+
+class StrBlobPtr {
+public:
+    StrBlobPtr() : curr(0) {}
+    StrBlobPtr(StrBlob& a, size_t sz = 0) : wptr(a.data), curr(sz) {}
+    bool operator!=(const StrBlobPtr& p) { return p.curr != curr; }
+    string& deref() const
+    {
+        auto p = check(curr, "dereference past end");
+        return (*p)[curr];
+    }
+    StrBlobPtr& incr()
+    {
+        check(curr, "increment past end of StrBlobPtr");
+        ++curr;
+        return *this;
+    }
+
+private:
+    std::shared_ptr<vector<string>> check(size_t i, const string& msg) const
+    {
+        auto ret = wptr.lock();
+        if (!ret) throw std::runtime_error("unbound StrBlobPtr");
+        if (i >= ret->size()) throw std::out_of_range(msg);
+        return ret;
+    }
+    std::weak_ptr<vector<string>> wptr;
+    size_t curr;
+};
+
+
+#endif
