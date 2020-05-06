@@ -13,7 +13,7 @@ class QueryResult;
 class TextQuery
 {
 public:
-    using LineNo = vector<string>::size_type;
+    using LineNo = vector<string>::size_type;//
     TextQuery(std::ifstream&);
     QueryResult query(const string&) const;//-------------------------------------
 
@@ -37,8 +37,9 @@ TextQuery::TextQuery(ifstream &is): file(new vector<string>)
                 lines.reset(new set<LineNo>);
             lines->insert(n);
         }
-    }
+    }//file -> map<word, frequency>
 }
+
 class QueryResult{
 public:
     friend std::ostream& print(std::ostream&, const QueryResult&);
