@@ -7,6 +7,7 @@ using std::string;
 
 class HasPtr {
 public:
+
     HasPtr(const std::string& s = std::string()) : ps(new std::string(s)), i(0)
     {
     }
@@ -28,9 +29,25 @@ public:
         i = rhs.i;
         return *this;
     }
+
+    HasPtr& operator<(const HasPtr& lhs, const HasPtr& rhs){
+        return *lhs.ps < *rhs.ps;
+    }
+
+    void show() { std::cout << *ps << std::endl; }
+
 private:
     std::string* ps;
     int i;
+    vector<HasPtr> vec;
 };
+
+void swap(HasPtr& lhs, HasPtr& rhs)
+{
+    using std::swap;
+    swap(lhs.ps, rhs.ps);
+    swap(lhs.i, rhs.i);
+    std::cout << "call swap(HasPtr& lhs, HasPtr& rhs)" << std::endl;
+}
 
 #endif
