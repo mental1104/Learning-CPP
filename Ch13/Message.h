@@ -81,6 +81,16 @@ void swap(Message &lhs, Message &rhs)
 }
 
 
+void Message::move_Folders(Message *m)
+{
+    folders = std::move(m->folders);
+    for (auto f: folders){
+        f->remMsg(m);
+        f->addMsg(this);
+    }
+    m->folders.clear();
+}
+
 /* ---------------------------------------------------------------------
 
 
