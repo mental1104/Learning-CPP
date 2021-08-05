@@ -167,4 +167,150 @@ delete p;
 [ex12_15.cpp](./ex12_15.cpp)
 
 
-### 16. 
+### 16. Compilers don’t always give easy-to-understand error messages if we attempt to copy or assign a unique_ptr. Write a program that contains these error to see how your compiler diagnoses them.  
+
+[ex12_16.cpp](./ex12_16.cpp)
+> It says 
+
+```
+/usr/include/c++/9/bits/unique_ptr.h:414:7: note: declared here
+  414 |       unique_ptr(const unique_ptr&) = delete;
+```
+
+### 17. Which of the following unique_ptr declarations are illegal or likely to result in subsequent program error? Explain what the problem is with each one.  
+
+```cpp
+int ix = 1024, *pi = &ix, *pi2 = new int(2048);
+typedef unique_ptr<int> IntP;
+```
+
+(a) IntP p0(ix);  
+> illegal, the parameter can only be a memory declared by `new`. (compliation-error) 
+```
+test.cpp: In function ‘int main()’:
+test.cpp:9:15: error: no matching function for call to ‘std::unique_ptr<int>::unique_ptr(int&)’
+    9 |     IntP p0(ix);
+      |               ^
+```
+(b) IntP p1(pi);  
+
+> illegal, it trys to free a stack variable.  (run-time error)
+```
+free(): invalid pointer
+Aborted
+```
+(c) IntP p2(pi2);
+
+> legal, however, the pi2 may be a dangling pointer.  
+
+(d) IntP p3(&ix);  
+
+> illegal, ix is on the stack, same as (b). (runtime error)  
+
+```
+free(): invalid pointer
+Aborted
+```
+
+(e) IntP p4(new int(2048));  
+
+> legal.  
+
+(f) IntP p5(p2.get());  
+
+> illegal, it will result in a double `free`. (runtime error) 
+
+```
+free(): double free detected in tcache 2
+Aborted
+```
+
+### 18. Why doesn’t shared_ptr have a release member?  
+
+> It doesn't have the exclusive right to its resource so it can make decision on its own.  
+
+### 19. Define your own version of StrBlobPtr and update your StrBlob class with the appropriate friend declaration and begin and end members.
+
+[StrBlob.h](./StrBlob.h)
+
+```cpp
+class StrBlobPtr
+{
+public:
+	StrBlobPtr() :curr(0) {}
+	StrBlobPtr(StrBlob &a, size_t sz = 0) :wptr(a.data), curr(sz) {}
+	bool operator!=(const StrBlobPtr& p) { return p.curr != curr; }
+	string& deref() const
+	{
+		auto p = check(curr, "dereference past end");
+		return (*p)[curr];
+	}
+	StrBlobPtr& incr()
+	{
+		check(curr, "increment past end of StrBlobPtr");
+		++curr;
+		return *this;
+	}
+
+private:
+	std::shared_ptr<vector<string>> check(size_t i, const string &msg) const
+	{
+		auto ret = wptr.lock();
+		if (!ret) throw std::runtime_error("unbound StrBlobPtr");
+		if (i >= ret->size()) throw std::out_of_range(msg);
+		return ret;
+	}
+	std::weak_ptr<vector<string>> wptr;
+	size_t curr;
+};
+
+StrBlobPtr StrBlob::begin()
+{
+	return StrBlobPtr(*this);
+}
+StrBlobPtr StrBlob::end()
+{
+	return StrBlobPtr(*this, data->size());
+}
+```  
+
+### 20. Write a program that reads an input file a line at a time into a StrBlob and uses a StrBlobPtr to print each element in that StrBlob.  
+
+[ex12_20.cpp](./ex12_20.cpp) 
+
+### 21. We could have written StrBlobPtr’s deref member as follows:  
+
+```cpp
+std::string& deref() const
+{ return (*check(curr, "dereference past end"))[curr]; }
+```
+Which version do you think is better and why?  
+
+> The original edition is more readable.  
+
+### 22. What changes would need to be made to StrBlobPtr to create a class that can be used with a const StrBlob? Define a class named ConstStrBlobPtr that can point to a const StrBlob.  
+
+[ConstStrBlobPtr](./ex12_22.h)  
+[main](./ex12_22.cpp)  
+
+### 23. Write a program to concatenate two string literals, putting the result in a dynamically allocated array of char. Write a program to concatenate two library strings that have the same value as the literals used in the first program.  
+
+[C-style string](./ex12_23a.cpp)  
+[STL string](./ex12_23b.cpp)  
+
+### 24. Write a program that reads a string from the standard input into a dynamically allocated character array. Describe how your program handles varying size inputs. Test your program by giving it a string of data that is longer than the array size you’ve allocated.  
+
+[ex12_24.cpp](./ex12_24.cpp)  
+
+### 25. Given the following new expression, how would you delete pa?  
+
+```
+int *pa = new int[10];
+``` 
+
+> delete[] pa;  
+
+### 26. Rewrite the program on page 481 using an allocator.  
+
+[ex12_26.cpp](./ex12_26.cpp) 
+
