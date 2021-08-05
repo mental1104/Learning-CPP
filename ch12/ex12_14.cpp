@@ -36,6 +36,10 @@ void f(destination& d)
 {
     connection conn = connect(&d);
     std::shared_ptr<connection> p(&conn, end_connection);
+    std::shared_ptr<connection> q;
+    std::shared_ptr<connection> r;
+    q = p;
+    r = q;
     std::cout << "connecting now(" << p.use_count() << ")" << std::endl;
 }
 

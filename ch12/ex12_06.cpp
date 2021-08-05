@@ -3,27 +3,27 @@
 
 using namespace::std;
 
-vector<int>* returnVector(){
-    vector<int>* ptr_v = new vector<int>();
-    return ptr_v;
+vector<int>* allocate(){
+    return new vector<int>();
 }
 
 
-void reade(vector<int>* vec){
+void fn_read(vector<int>* vec){
     int i;
     while(cin >> i)
         vec->push_back(i);
 }
 
 void print(vector<int>* vec){
-    for (const auto& e : *vec) cout << e << " ";
+    for (const int& e : *vec) cout << e << " ";
     cout << "\n";
 }
 
 int main(){
-    auto iter = returnVector();
-    reade(iter);
+    vector<int>* iter = allocate();
+    fn_read(iter);
     print(iter);
     delete iter;
+    iter = nullptr;
     return 0;
 }
