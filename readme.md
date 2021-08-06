@@ -5,7 +5,7 @@ Cpp-Primer Solutions and Note
 
 ## PART II - The C++ Library
 
-+ ### 12. [Dynamic Memory](./ch12)  
++ ### 12. [Dynamic Memory](./ex/ch12)  
 
 ## PART III - Tools for Class Authors  
 
