@@ -1,5 +1,8 @@
 # Chapter 12: Dynamic Memory  
+## Node
 
+[ConstStrBlobPtr](./ex12_22.h)   
+[StrBlobPtr](./StrBlob.h)  
 ## Exercises  
 
 ### 1. How many elements do b1 and b2 have at the end of this code?  
@@ -314,3 +317,41 @@ int *pa = new int[10];
 
 [ex12_26.cpp](./ex12_26.cpp) 
 
+### 27. The TextQuery and QueryResult classes use only capabilities that we have already covered. Without looking ahead, write your own versions of these classes.  
+
+[Query.cpp](./Query.cpp)  
+
+### 28. Write a program to implement text queries without defining classes to manage the data. Your program should take a file and interact with a user to query for words in that file. Use vector, map, and set containers to hold the data for the file and to generate the results for the queries.  
+
+[ex12_28.cpp](./ex12_28.cpp)  
+
+### 29. We could have written the loop to manage the interaction with the user as a do while (§ 5.4.4, p. 189) loop. Rewrite the loop to use a do while. Explain which version you prefer and why.  
+
+```cpp
+do {
+    std::cout << "enter word to look for, or q to quit: ";
+    string s;
+    if (!(std::cin >> s) || s == "q") break;
+    print(std::cout, tq.query(s)) << std::endl;
+} while ( true );
+```
+
+> It depends on preference.  
+
+### 30. Define your own versions of the TextQuery and QueryResult classes and execute the runQueries function from § 12.3.1 (p. 486).  
+
+[Query.cpp](./Query.cpp)  
+
+### 31. What difference(s) would it make if we used a vector instead of a set to hold the line numbers? Which approach is better? Why?  
+
+> `vector` would save duplicate line number. In this situation we do not need duplicate line number so `set` is better.  
+
+### 32. Rewrite the TextQuery and QueryResult classes to use a StrBlob instead of a vector<string> to hold the input file.  
+
+[ex12_32.h](./ex12_32.h)  
+[ex12_32.cpp](./ex12_32.cpp)  
+
+### 33. In Chapter 15 we’ll extend our query system and will need some additional members in the QueryResult class. Add members named begin and end that return iterators into the set of line numbers returned by a given query, and a member named get_file that returns a shared_ptr to the file in the QueryResult object.
+
+[ex12_33.h](./ex12_33.h)  
+[ex12_33.cpp](./ex12_33.cpp)  

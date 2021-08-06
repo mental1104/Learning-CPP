@@ -95,7 +95,7 @@ void runQueries(ifstream &infile)
 }
 
 int main(){
-    ifstream ifs("book.txt");
+    ifstream ifs("ex12_20.txt");
     runQueries(ifs);
     return 0;
 }
