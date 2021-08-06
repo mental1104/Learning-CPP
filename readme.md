@@ -10,3 +10,9 @@ Cpp-Primer Solutions and Note
 ## PART III - Tools for Class Authors  
 
 ## PART IV - Advanced Topics
+
+---
+
+## [Effective C++](./effective/old)  
+## [C++ Concurrency in Action](./concurrency)
+
