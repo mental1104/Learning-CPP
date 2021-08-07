@@ -443,4 +443,178 @@ initializes each data member to the default value of its associated type.
 
 > Untrue, only if our class does not explicitly define **any constructors**, the compiler will implicitly define the default constructor for us.
 
+### 47. Explain whether the Sales_data constructor that takes a string should be explicit. What are the benefits of making the constructor explicit? What are the drawbacks?  
 
+Pros:  
+
++ prevent the use of a constructor in a context that requires an implicit conversion.
++ we can define a constructor which is used only with the direct form of initialization.
+
+Cons:  
+
++ meaningful only on constructors that can be called with a single argument.  
+
+### 48. Assuming the Sales_data constructors are not explicit, what operations happen during the following definitions?  
+
+```cpp
+string null_isbn("9-999-99999-9");
+Sales_data item1(null_isbn);
+Sales_data item2("9-999-99999-9");
+```  
+
+[ex7_48.cpp](./ex7_48.cpp)  
+
+```
+Sales_data(const std::string&, unsigned, double)
+Sales_data(const std::string&)
+Sales_data(const std::string&, unsigned, double)
+Sales_data(const std::string&)
+```  
+
+### 49. For each of the three following declarations of combine, explain what happens if we call i.combine(s), where i is a Sales_data and s is a string:  
+
+```
+(a) Sales_data &combine(Sales_data);//ok  
+(b) Sales_data &combine(Sales_data&);  // [Error] no matching function for call to 'Sales_data::combine(std::string&)' (`std::string&` can not convert to `Sales_data` type.)  
+(c) Sales_data &combine(const Sales_data&) const; //// The trailing const mark can't be put here, as it forbids any mutation on data members.   
+```  
+
+### 50. Determine whether any of your Person class constructors should be explicit.  
+
+[ex7_50.h](./ex7_50.h)  
+
+```cpp
+explicit Person(std::istream& is) { read(is, *this); }
+```  
+
+### 51. Why do you think vector defines its single-argument constructor as explicit, but string does not?  
+
+Such as a function like that:
+
+```cpp
+int getSize(const std::vector<int>&);
+```  
+if vector has not defined its single-argument constructor as explicit. we can use the function like:
+
+```cpp
+getSize(34);
+```
+What is this mean? It's very confused.
+
+But the std::string is different. In ordinary, we use std::string to replace const char *(the C language). so when we call a function like that:
+
+```cpp
+void setYourName(std::string); // declaration.
+setYourName("pezy"); // just fine.
+```
+it is very natural.  
+
+### 52. Using our first version of Sales_data from § 2.6.1 (p. 72), explain the following initialization. Identify and fix any problems.  
+
+```cpp
+Sales_data item = {"978-0590353403", 25, 15.99};
+```  
+From my machine It's fine...  
+
+[ex7_52.cpp](./ex7_52.cpp)
+
+```
+➜  ch07 git:(master) ✗ g++ ex7_52.cpp
+➜  ch07 git:(master) ✗ ./a.out
+978-0590353403 25 15.99 0.6396
+```  
+
+### 53. Define your own version of Debug.  
+
+[ex7_53.h](./ex7_53.h)  
+
+### 54. Should the members of Debug that begin with set_ be declared asconstexpr? If not, why not?  
+
+> It shouldn't, cause a constexpr function must contain exactly one return statement.  
+
+### 55. Is the Data class from § 7.5.5 (p. 298) a literal class? If not, why not? If so, explain why it is literal.  
+
+> No. It can be verified by the following code.  
+
+[ex7_55.cpp](./ex7_55.cpp)  
+
+```cpp
+#include <string>
+#include <iostream>
+#include <type_traits>
+
+struct Data {
+    int ival;
+    std::string s;
+};
+
+int main()
+{
+    std::cout << std::boolalpha;
+    std::cout << std::is_literal_type<Data>::value << std::endl;
+    // output: false
+}
+```
+
+```
+➜  ch07 git:(master) ✗ g++ ex7_55.cpp
+➜  ch07 git:(master) ✗ ./a.out
+false
+```
+
+### 56. What is a static class member? What are the advantages of static members? How do they differ from ordinary members?  
+
+> (1) A class member that is associated with the class, rather than with individual objects of the class type.  
+
+> (2) each object can no need to store a common data. And if the data is changed, each object can use the new value.  
+
+> (3) a static data member can have incomplete type.  
+> we can use a static member as a default argument.  
+
+### 57. Write your own version of the Account class.  
+
+[ex7_57.h](./ex7_57.h)   
+
+### 58. Which, if any, of the following static data member declarations and definitions are errors? Explain why.  
+
+```cpp
+// example.h
+class Example {
+public:
+    static double rate = 6.5;
+    static const int vecSize = 20;
+    static vector<double> vec(vecSize);
+};
+// example.C
+#include "example.h"
+double Example::rate;
+vector<double> Example::vec;
+```  
+
+Problem:  
+```cpp
+static double rate = 6.5;
+                ^
+            rate should be a constant expression.
+
+static vector<double> vec(vecSize);
+                            ^
+            we may not specify an in-class initializer inside parentheses.
+```  
+
+Fixed:  
+
+```cpp 
+// example.h
+class Example {
+public:
+    static constexpr double rate = 6.5;
+    static const int vecSize = 20;
+    static vector<double> vec;
+};
+
+// example.C
+#include "example.h"
+constexpr double Example::rate;
+vector<double> Example::vec(Example::vecSize);
+```
