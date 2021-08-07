@@ -3,6 +3,8 @@ Cpp-Primer Solutions and Note
 
 ## PART I - The Basics
 
++ ### 7. [Classes](./ex/ch07)
+
 ## PART II - The C++ Library
 
 + ### 12. [Dynamic Memory](./ex/ch12)  
