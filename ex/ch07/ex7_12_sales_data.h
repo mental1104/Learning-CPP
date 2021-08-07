@@ -1,4 +1,3 @@
-
 #ifndef CP5_ex7_12_h
 #define CP5_ex7_12_h
 

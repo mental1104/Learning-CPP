@@ -1,17 +1,21 @@
-# Cpp-Primer 5th
-Cpp-Primer Solutions and Note  
+# Learning C++
 
-## PART I - The Basics
+## C++ Primer
 
-+ ### 7. [Classes](./ex/ch07)
++ #### 1. [Getting Started](./ex/ch01) 
 
-## PART II - The C++ Library
+### PART I - The Basics
++ #### 2. [Variables and Basic Types](./ex/ch02)
 
-+ ### 12. [Dynamic Memory](./ex/ch12)  
++ #### 7. [Classes](./ex/ch07)
 
-## PART III - Tools for Class Authors  
+### PART II - The C++ Library
 
-## PART IV - Advanced Topics
++ #### 12. [Dynamic Memory](./ex/ch12)  
+
+### PART III - Tools for Class Authors  
+
+### PART IV - Advanced Topics
 
 ---
 

@@ -9,8 +9,8 @@ using std::endl;
 int main(){
     Sales_item A, B;
     cin >> A >> B;
-    if(A.isbn()==B.isbn())
-        cout << A+B << endl;
+    if(A.isbn() == B.isbn())
+        cout << A + B << endl;
     else
         cerr << "Different ISBN." << endl;
     return 0;

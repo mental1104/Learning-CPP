@@ -1,13 +1,3 @@
-//
-//  ex12_32.h
-//  Exercise 12.32
-//
-//  Created by pezy on 1/1/15.
-//  Copyright (c) 2015 pezy. All rights reserved.
-//
-//  Rewrite the TextQuery and QueryResult classes to use a StrBlob
-//  instead of a vector<string> to hold the input file.
-
 #ifndef CP5_ex12_32_h
 #define CP5_ex12_32_h
 

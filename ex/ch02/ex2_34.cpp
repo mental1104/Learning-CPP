@@ -19,6 +19,7 @@ int main()
     c = 42;
     *d = 42;
     e = &c;
+    std::cout << a << " " << b << " " << c << std::endl;
 
     return 0;
 }

@@ -1,3 +1,6 @@
+#ifndef CP5_ex12_02_h
+#define CP5_ex12_02_h
+
 #include <vector>
 #include <string>
 #include <initializer_list>
@@ -50,3 +53,5 @@ private:
 private:
     std::shared_ptr<vector<string>> data;
 };
+
+#endif

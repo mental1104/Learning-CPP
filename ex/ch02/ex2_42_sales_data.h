@@ -1,3 +1,6 @@
+#ifndef CP5_ex2_42_h
+#define CP5_ex2_42_h
+
 #include <iostream>
 #include <string>
 
@@ -49,4 +52,6 @@ void Sales_data::Print()
         std::cout << averagePrice << std::endl;
     else
         std::cout << "(no sales)" << std::endl;
-}
+}  
+
+#endif
