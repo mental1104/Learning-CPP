@@ -1,4 +1,5 @@
-#include<vector>
+#ifndef CP5_ex7_43_h
+#define CP5_ex7_43_h
 
 class NoDefault{
 public:
@@ -13,11 +14,4 @@ private:
     NoDefault X;
 };
 
-
-int main()
-{
-    C c;
-
-    std::vector<C> vec(10);
-    return 0;
-}
+#endif
