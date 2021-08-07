@@ -9,7 +9,6 @@ using std::endl;
 int main(){
     string temp;
     while(getline(cin, temp))
-        cout<<temp<<endl;    
-
+        cout << temp << endl;    
     return 0;
 }

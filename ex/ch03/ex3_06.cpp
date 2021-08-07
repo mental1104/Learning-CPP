@@ -5,9 +5,9 @@ using namespace::std;
 
 int main(){
     string temp;
-    cin>>temp;
+    cin >> temp;
     for(auto &c:temp)
         c = 'X';
-    cout<<temp<<endl;
+    cout << temp <<endl;
     return 0;
 }

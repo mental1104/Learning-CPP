@@ -5,7 +5,8 @@
 + #### 1. [Getting Started](./ex/ch01) 
 
 ### PART I - The Basics
-+ #### 2. [Variables and Basic Types](./ex/ch02)
++ #### 2. [Variables and Basic Types](./ex/ch02)  
++ #### 3. [Strings, Vectors, and Arrays](./ex/ch03)
 
 + #### 7. [Classes](./ex/ch07)
 

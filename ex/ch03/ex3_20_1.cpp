@@ -8,8 +8,8 @@ int main(){
     int num;
     while(cin>>num)
         vec.push_back(num);
-
-    for(auto i = vec.cbegin();i!=vec.cend()-1;++i)
-        cout << *i + *(i+1) << endl;
+    for(decltype(vec.size()) i = 0; i!=vec.size()-1;++i)
+        cout << vec[i] + vec[i+1] << " ";
+    cout << endl;
     return 0;
 }

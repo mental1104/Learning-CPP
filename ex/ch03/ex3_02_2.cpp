@@ -7,10 +7,9 @@ using std::cout;
 using std::endl;
 
 int main(){
-
-    string temp_2;
-    while(cin>>temp_2)
-        cout<<temp_2<<endl;
+    string temp;
+    while(cin >> temp)
+        cout << temp << endl;
 
     return 0;
 }

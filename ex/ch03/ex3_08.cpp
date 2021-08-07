@@ -15,6 +15,4 @@ int main()
         ++i;
     }
     cout << str << endl;
-
-    
 }

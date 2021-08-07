@@ -4,11 +4,11 @@ using namespace::std;
 
 int main(){
     string a("you,are,not");
-    for(decltype(a.size()) i = 0; i!=a.size();i++){
+    for(decltype(a.size()) i = 0; i!=a.size(); i++){
         if(ispunct(a[i]))
             continue;
-        cout<<a[i];
+        cout << a[i];
     }
-    cout<<endl;
+    cout << endl;
     return 0;
 }
