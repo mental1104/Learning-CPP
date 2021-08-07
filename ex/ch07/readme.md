@@ -186,3 +186,221 @@ cout << "\n";
 [ex7_27.h](./ex7_27.h)  
 [ex7_27.cpp](./ex7_27.cpp)  
 
+### 28. What would happen in the previous exercise if the return type of move, set, and display was Screen rather than Screen&?
+
+> It will duplicate it self to return a temporary copy instead of myScreen.  
+
+### 29. Revise your Screen class so that move, set, and display functions return Screen and check your prediction from the previous exercise.  
+
+[ex7_29.h](./ex7_27.h)  
+[ex7_29.cpp](./ex7_29.cpp)  
+
+```
+➜  ch07 git:(master) g++ ex7_27.cpp
+➜  ch07 git:(master) ✗ ./a.out
+XXXXXXXXXXXXXXXXXXXX#XXXX
+XXXXXXXXXXXXXXXXXXXX#XXXX
+➜  ch07 git:(master) ✗ g++ ex7_29.cpp
+➜  ch07 git:(master) ✗ ./a.out
+XXXXXXXXXXXXXXXXXXXX#XXXX
+XXXXXXXXXXXXXXXXXXXXXXXXX
+```
+
+> `set()` actually modify the temporary copy returned by `move()`, not myScreen itself.  
+
+### 30. It is legal but redundant to refer to members through the this pointer. Discuss the pros and cons of explicitly using the this pointer to access members.  
+
+Pros:
+
++ more explicit
++ less scope for misreading
++ can use the member function parameter which name is same as the member name.  
+
+```cpp
+void setAddr(const std::string &addr) {this->addr = addr;}
+```
+
+Cons:  
+
++ more to read
++ sometimes redundant
+
+```cpp
+std::string getAddr() const { return this->addr; } // unnecessary
+```  
+
+### 31. Define a pair of classes X and Y, in which X has a pointer to Y, and Y has an object of type X.  
+
+[ex7_31.h](./ex7_31.h)  
+
+### 32. Define your own versions of Screen and Window_mgr in which clear is a member of Window_mgr and a friend of Screen.  
+
+[ex7_32.h](./ex7_32.h)  
+
+### 33. What would happen if we gave Screen a size member defined as follows? Fix any problems you identify.  
+
+```cpp
+pos Screen::size() const
+{
+return height * width;
+}
+```
+
+> error: unknown type name 'pos' 
+
+```cpp
+Screen::pos Screen::size() const
+{
+    return height*width;
+}
+```  
+
+### 34. What would happen if we put the typedef of pos in the Screen class on page 285 as the last line in the class?
+
+```
+dummy_fcn(pos height)
+           ^
+Unknown type name 'pos'
+```  
+
+### 35. Explain the following code, indicating which definition of Type or initVal is used for each use of those names. Say how you would fix any errors.  
+
+```cpp
+typedef string Type;
+Type initVal();//string
+
+class Exercise {
+public:
+    typedef double Type;
+    Type setVal(Type);//double
+    Type initVal();//double
+private:
+    int val;
+};
+
+Type Exercise::setVal(Type parm) {//first is `string`, second is `double`
+    val = parm + initVal();     //// Exercise::initVal()
+    return val;
+}
+```
+
+> As follows.  
+
+```cpp
+Exercise::Type Exercise::setVal(Type parm) {
+    val = parm + initVal();
+    return val;
+}
+```  
+> Exercise::initVal() should be defined.  
+
+### 36. The following initializer is in error. Identify and fix the problem.  
+
+```cpp
+struct X {
+    X (int i, int j): base(i), rem(base % j) { }
+    int rem, base;
+};
+```  
+
+> fixed:  
+
+```cpp
+struct X {
+    X (int i, int j): base(i), rem(base % j) { }
+    int base, rem;
+};
+```    
+
+### 37. Using the version of Sales_data from this section, determine which constructor is used to initialize each of the following variables and list the values of the data members in each object:
+
+```cpp
+Sales_data first_item(cin);//use Sales_data(std::istream &is) ; 
+int main() {
+    Sales_data next;//use Sales_data(std::string s = "");
+    Sales_data last("9-999-99999-9");// use Sales_data(std::string s = "");
+}
+```
+
+### 38. We might want to supply cin as a default argument to the constructor that takes an istream&. Write the constructor declaration that uses cin as a default argument.  
+
+```cpp
+Sales_data(std::istream &is = std::cin) { read(is, *this); }
+```  
+
+### 39. Would it be legal for both the constructor that takes a string and the one that takes an istream& to have default arguments? If not, why not?
+
+> No. For no parameter situation it would be ambiguous.   
+
+### 40. Choose one of the following abstractions (or an abstraction of your own choosing). Determine what data are needed in the class. Provide an appropriate set of constructors. Explain your decisions.  
+
+(a) Book  
+(d) Vehicle
+(b) Date
+(e) Object
+(c) Employee
+(f) Tree  
+
+```cpp
+class Book {
+public:
+    Book() = default;
+    Book(unsigned no, std::string name, std::string author, std::string pubdate) : no_(no), name_(name), author_(author), pubdate_(pubdate) { }
+    Book(std::istream &in) { in >> no_ >> name_ >> author_ >> pubdate_; }
+
+private:
+    unsigned no_;
+    std::string name_;
+    std::string author_;
+    std::string pubdate_;
+};
+```  
+
+### 41. Rewrite your own version of the Sales_data class to use delegating constructors. Add a statement to the body of each of the constructors that prints a message whenever it is executed. Write declarations to construct a Sales_data object in every way possible. Study the output until you are certain you understand the order of execution among delegating constructors.  
+
+`g++ ex7_41_sales_data_test.cpp ex7_41_sales_data.cpp`  
+
+[ex7_41_sales_data.h](./ex7_41_sales_data.h)  
+[ex7_41_sales_data.cpp](./ex7_41_sales_data.cpp)  
+[ex7_41_sales_data_test.cpp](./ex7_41_sales_data.cpp) 
+
+```
+1. default way: 
+----------------
+Sales_data(const std::string&, unsigned, double)
+Sales_data()
+
+2. use std::string as parameter: 
+----------------
+Sales_data(const std::string&, unsigned, double)
+Sales_data(const std::string&)
+
+3. complete parameters: 
+----------------
+Sales_data(const std::string&, unsigned, double)
+
+4. use istream as parameter: 
+----------------
+Sales_data(const std::string&, unsigned, double)
+Sales_data()
+Sales_data(istream &is)
+```
+
+### 42. For the class you wrote for exercise 7.40 in § 7.5.1 (p. 291), decide whether any of the constructors might use delegation. If so, write the delegating constructor(s) for your class. If not, look at the list of abstractions and choose one that you think would use a delegating constructor. Write the class definition for that abstraction.
+
+
+```cpp
+class Book {
+public:
+  Book(unsigned no, std::string name, std::string author, std::string pubdate):no_(no), name_(name), author_(author), pubdate_(pubdate) { }
+  Book() : Book(0, "", "", "") { }
+  Book(std::istream &in) : Book() { in >> no_ >> name_ >> author_ >> pubdate_; }
+
+private:
+  unsigned no_;
+  std::string name_;
+  std::string author_;
+  std::string pubdate_;
+};
+```  
+
