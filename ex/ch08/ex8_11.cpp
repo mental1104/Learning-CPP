@@ -8,7 +8,7 @@ using namespace::std;
 struct PersonInfo{
     string name;
     vector<string> phones;
-}
+};
 
 int main(){
     string line, word;

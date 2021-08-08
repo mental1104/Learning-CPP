@@ -13,10 +13,5 @@ istream& func(istream &is)
 int main(){
     string one;
     func(cin)>>one;
-    int i = 0;
-    while(i<10){
-        cout<< one << " ";
-        i++;
-    }
     return 0;
 }

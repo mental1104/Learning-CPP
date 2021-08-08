@@ -6,15 +6,15 @@
 using namespace::std;
 
 int main(){
-    ifstream i("ex8_4.txt");
+    ifstream i("ex8_04.txt");
     string str;
     vector<string> devil;
-    while(i>>str){
+    while(getline(i,str)){
         devil.push_back(str);
     }
 
     for(auto s:devil)
-        cout<<s<<" ";
+        cout<<s<<endl;
     return 0;
 }
 
