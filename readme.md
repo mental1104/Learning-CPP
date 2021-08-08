@@ -6,7 +6,8 @@
 
 ### PART I - The Basics
 + #### 2. [Variables and Basic Types](./ex/ch02)  
-+ #### 3. [Strings, Vectors, and Arrays](./ex/ch03)
++ #### 3. [Strings, Vectors, and Arrays](./ex/ch03)  
++ #### 4. [Expressions](./ex/ch04)  
 
 + #### 7. [Classes](./ex/ch07)
 
