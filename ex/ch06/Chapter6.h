@@ -1,7 +1,4 @@
-int fact(int val);
+int fact(int);
 int func();
-
-template <typename T> T abs(T i)
-{
-    return i >= 0 ? i : -i;
-}
+int _abs(int);
+int re();

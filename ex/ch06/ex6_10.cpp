@@ -12,6 +12,6 @@ int main(){
     int* pa = &a;
     int* pb = &b;
     exch(pa,pb);
-    cout << a << b << endl;
+    cout << a << " " << b << endl;
     return 0;
 }
