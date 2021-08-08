@@ -13,7 +13,7 @@
 + #### 7. [Classes](./ex/ch07)
 
 ### PART II - The C++ Library
-
++ #### 8. [The IO Library](./ex/ch08)
 + #### 12. [Dynamic Memory](./ex/ch12)  
 
 ### PART III - Tools for Class Authors  
