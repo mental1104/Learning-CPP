@@ -6,7 +6,7 @@ using namespace::std;
 int sum(initializer_list<int> a){
     int s = 0;
     for(auto i:a)
-        s+=i;
+        s += i;
     return s;
 }
 

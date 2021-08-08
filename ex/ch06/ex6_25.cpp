@@ -8,7 +8,7 @@ int main(int argc, char **argv){
         str += argv[i];
         str += " ";
     }
-    cout<<str<<endl;
+    cout << str <<endl;
     return 0;
 
 }

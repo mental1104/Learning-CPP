@@ -38,7 +38,7 @@ void print(const int (&arr)[2])
 int main()
 {
     int i = 0, j[2] = {0, 1};
-    char ch[5] = "devil";
+    char ch[6] = "devil";
 
     print(ch);
     print(begin(j), end(j));
