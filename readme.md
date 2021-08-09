@@ -14,7 +14,9 @@
 
 ### PART II - The C++ Library
 + #### 8. [The IO Library](./ex/ch08)  
-+ #### 9. [Sequential Containers](./ex/ch09)
++ #### 9. [Sequential Containers](./ex/ch09)  
++ #### 10. [Generic Algorithm](./ex/ch10)  
++ #### 11. [Associative Containers](./ex/ch11)  
 + #### 12. [Dynamic Memory](./ex/ch12)  
 
 ### PART III - Tools for Class Authors  

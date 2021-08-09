@@ -9,7 +9,8 @@ int main(){
     map<int,string> m;
     m[25] = "dante";
     auto iter = m.begin();
-    iter -> second = "vergil";
+    iter->second = "vergil";
     cout << iter->second << endl;
+    cout << m[25] << endl;
     return 0;
 }
