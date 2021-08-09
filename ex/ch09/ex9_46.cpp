@@ -3,11 +3,10 @@
 
 using namespace::std;
 
-string& func(const string &s, const string& a, const string& b){
-    string temp(s);
+string& func(string& s, const string& a, const string& b){
     s.insert(0,a);
-    s.insert(temp.size(),b);
-    return temp;
+    s.insert(s.size(),b);
+    return s;
 }
 
 int main(){

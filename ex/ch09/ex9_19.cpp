@@ -7,12 +7,11 @@ using namespace::std;
 int main(){
     string temp;
     list<string> que;
-    auto iter = que.begin();
     while(cin>>temp)
-        iter = que.insert(iter, temp);
+        que.push_back(temp);
 
-    while(iter!=que.end())
-        cout<<*(iter++)<<" ";
+    for(auto i: que)
+        cout << i << " ";
         
     cout << endl;
     return 0;
