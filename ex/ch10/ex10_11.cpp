@@ -17,7 +17,7 @@ bool isShorter(const string &s1, const string &s2)
 }
 
 int main(){
-    vector<string> vec = {"so","by","so","by","fa","fa","fa","he","oh"};
+    vector<string> vec = {"so","by", "You shall die", " My power shall be absolute", "so","by","fa","fa","fa","he","oh"};
     elimDups(vec);
     stable_sort(vec.begin(),vec.end(),isShorter);
     for(const auto &s: vec)

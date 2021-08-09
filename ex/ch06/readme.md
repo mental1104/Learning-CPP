@@ -1,5 +1,7 @@
 # Chapter 6 Functions  
 
+## Exercise 
+
 #### 6.1 What is the difference between a parameter and an argument?  
 
 + Parameters: Local variable declared inside the function parameter list. they are initialized by the arguments provided in the each function call.

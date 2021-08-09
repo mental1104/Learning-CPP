@@ -1,5 +1,7 @@
 # Chapter 5 Statement  
 
+## Exercise  
+
 #### 5.1 What is a null statement? When might you use a null statement?  
 
 > ; // null statement  

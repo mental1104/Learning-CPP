@@ -6,6 +6,7 @@ Precedence Table
 ![](./pic/table_2.png)  
 ![](./pic/table_3.png)  
 
+## Exercise  
 
 #### 4.1. What is the value returned by 5 + 10 * 20/2?  
 
