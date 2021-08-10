@@ -4,6 +4,9 @@
 
 [memberwise-copy/bitwise-copy](https://stackoverflow.com/questions/42749439/what-is-the-difference-between-memberwise-copy-bitwise-copy-shallow-copy-and-d#)  
 
+[value-like-HasPtr](./ex13_22.h)  
+[pointer-like-HasPtr](./ex13_27.h)   
+
 
 ## Exercise  
 
@@ -299,4 +302,114 @@ f(a); f(b); f(c);
 
 > As synthesized version meet all requirements for this case, no custom version control members need to define.   
 
-#### 13.22 
+#### 13.22 Assume that we want HasPtr to behave like a value. That is, each object should have its own copy of the string to which the objects point. We’ll show the definitions of the copy-control members in the next section. However, you already know everything you need to know to implement these members. Write the HasPtr copy constructor and copy-assignment operator before reading on.  
+
+```cpp
+#ifndef CP5_ex13_11_h
+#define CP5_ex13_11_h
+
+#include <string>
+
+class HasPtr {
+public:
+    HasPtr(const std::string& s = std::string()) : ps(new std::string(s)), i(0)
+    {
+    }
+    HasPtr(const HasPtr& hp) : ps(new std::string(*hp.ps)), i(hp.i) {}
+    HasPtr& operator=(const HasPtr& hp)
+    {
+        auto new_p = new std::string(*hp.ps);
+        delete ps;
+        ps = new_p;
+        i = hp.i;
+        return *this;
+    }
+    ~HasPtr() { delete ps; }
+private:
+    std::string* ps;
+    int i;
+};
+
+#endif
+```
+
+[ex13_22.h](./ex13_22.h)  
+
+#### 13.23 Compare the copy-control members that you wrote for the solutions to the previous section’s exercises to the code presented here. Be sure you understand the differences, if any, between your code and ours.  
+
+> Check 13.22.  
+
+#### 13.24 What would happen if the version of HasPtr in this section didn’t define a destructor? What if HasPtr didn’t define the copy constructor?  
+
+> If HasPtr didn't define a destructor, memory leak will happened. (Synthesized destructor) 
+
+> If HasPtr didn't define the copy constructor, when assignment happened, just points copied, the string witch ps points haven't been copied. (Synthesized copy constructor)
+
+#### 13.25 Assume we want to define a version of StrBlob that acts like a value. Also assume that we want to continue to use a shared_ptr so that our StrBlobPtr class can still use a weak_ptr to the vector. Your revised class will need a copy constructor and copy-assignment operator but will not need a destructor. Explain what the copy constructor and copy-assignment operators must do. Explain why the class does not need a destructor.  
+
+> Copy constructor and copy-assignment operator should dynamically allocate memory for its own , rather than share the object with the right hand operand.  
+
+> Synthesized destructor will meet our requirements.  
+
+#### 13.26 Write your own version of the StrBlob class described in the previous exercise.  
+
+```cpp
+StrBlob(const StrBlob& rhs):data(make_shared<vector<string>>(*rhs.data)){}  
+    
+StrBlob& operator=(const StrBlob& rhs){
+    data = make_shared<vector<string>>(*rhs.data);
+    return *this;
+}
+```
+
+[ex13_26.h](./ex13_26.h)  
+
+#### 13.27 Define your own reference-counted version of HasPtr.  
+
+[ex13_27.h](./ex13_27.h)  
+
+#### 13.28 Given the following classes, implement a default constructor and the necessary copy-control members.
+
+(a)
+
+```cpp
+class TreeNode {
+private:
+    std::string value;
+    int count;
+    TreeNode *left;
+    TreeNode *right;
+};
+```
+
+(b)
+
+```cpp
+class BinStrTree {
+private:
+    TreeNode* root;    
+};  
+```  
+
+[ex13_28.h](./ex13_28.h)  
+
+#### 13.29 Explain why the calls to swap inside swap(HasPtr&, HasPtr&) do not cause a recursion loop.  
+
+> swap(lhs.ps, rhs.ps); feed the version : swap(std::string*, std::string*) and swap(lhs.i, rhs.i); feed the version : swap(int, int). Both them can't call swap(HasPtr&, HasPtr&). Thus, the calls don't cause a recursion loop.  
+
+#### 13.30 Write and test a swap function for your valuelike version of HasPtr. Give your swap a print statement that notes when it is executed.    
+
+[ex13_30.h](./ex13_30.h)  
+
+#### 13.31 Give your class a < operator and define a vector of HasPtrs. Give that vector some elements and then sort the vector. Note when swap is called.  
+
+[ex13_31.h](./ex13_31.h)    
+
+#### 13.32 Would the pointerlike version of HasPtr benefit from defining a swap function? If so, what is the benefit? If not, why not?
+
+> Essentially, the specific avoiding memory allocation is the reason why it improve performance. As for the pointer-like version, no dynamic memory allocation anyway. Thus, a specific version for it will not improve the performance.  
+
+
+
+
+

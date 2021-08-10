@@ -1,5 +1,5 @@
-#ifndef CP5_ex13_05_h
-#define CP5_ex13_05_h
+#ifndef CP5_ex13_22_h
+#define CP5_ex13_22_h
 
 #include <string>
 using std::string;
@@ -12,7 +12,7 @@ public:
     }
     HasPtr(const HasPtr& hp) : ps(new std::string(*hp.ps)), i(hp.i) {}
     HasPtr& operator=(const HasPtr& rhs){
-        string temp = new string(*rhs.ps);
+        string* temp = new string(*rhs.ps);
         delete ps;
         ps = temp;
         i = rhs.i;
