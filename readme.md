@@ -21,6 +21,7 @@
 
 ### PART III - Tools for Class Authors  
 
++ #### 13. [Copy Control](./ex/ch13)  
 ### PART IV - Advanced Topics
 
 ---
