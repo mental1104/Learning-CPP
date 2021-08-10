@@ -409,7 +409,43 @@ private:
 
 > Essentially, the specific avoiding memory allocation is the reason why it improve performance. As for the pointer-like version, no dynamic memory allocation anyway. Thus, a specific version for it will not improve the performance.  
 
+#### 13.33 Why is the parameter to the save and remove members of Message a Folder&? Why didn’t we define that parameter as Folder? Or const Folder&?
 
+> Because these operations must also update the given Folder. Updating a Folder is a job that the Folder class controls through its addMsg and remMsg members, which will add or remove a pointer to a given Message, respectively.  
 
+#### 13.34 Write the Message class as described in this section.  
+
+[ex13_34.h](./ex13_34.h)  
+[ex13_34.cpp](./ex13_34.cpp)  
+[ex13_34_test.cpp](./ex13_34_test.cpp)  
+
+```
+➜  ch13 git:(master) ✗ g++ ex13_34_test.cpp ex13_34.cpp
+➜  ch13 git:(master) ✗ ./a.out
+hello
+hello 
+welcome to cppprimer
+hello welcome to cppprimer 
+hello
+hello welcome to cppprimer 
+```  
+
+#### 13.35 What would happen if Message used the synthesized versions of the copy-control members?  
+
+> some existing Folders will be out of sync with the Message after assignment.
+
+#### 13.36 Design and implement the corresponding Folder class. That class should hold a set that points to the Messages in that Folder.  
+
+> see ex13.34.  
+
+#### 13.37 Design and implement the corresponding Folder class. That class should hold a set that points to the Messages in that Folder.
+
+> see ex13.34.    
+
+#### 13.38 We did not use copy and swap to define the Message assignment operator. Why do you suppose this is so?
+
+> The copy and swap is an elegant way when working with dynamically allocated memory. In the Message class ,nothing is allocated dynamically. Thus using this idiom makes no sense and will make it more complicated to implement due to the pointers that point back.  
+
+#### 
 
 
