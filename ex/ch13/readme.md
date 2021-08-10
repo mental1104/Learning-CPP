@@ -446,6 +446,98 @@ hello welcome to cppprimer
 
 > The copy and swap is an elegant way when working with dynamically allocated memory. In the Message class ,nothing is allocated dynamically. Thus using this idiom makes no sense and will make it more complicated to implement due to the pointers that point back.  
 
-#### 
+#### 13.39 Write your own version of StrVec, including versions of reserve, capacity (§ 9.4, p. 356), and resize (§ 9.3.5, p. 352).  
+
+[ex13_39.h](./ex13_39.h)  
+[ex13_39.cpp](./ex13_39.cpp)  
+
+#### 13.40 Add a constructor that takes an initializer_list<string> to your StrVec class.  
+
+[ex13_40.h](./ex13_40.h)  
+[ex13_40.cpp](./ex13_40.cpp)  
+
+#### 13.41 Why did we use postfix increment in the call to construct inside push_back? What would happen if it used the prefix increment?  
+
+```
+|a|b|c|d|f|..............|
+^          ^             ^
+elements   first_free    cap
+
+// if use alloc.construct(first_free++, "g");
+|a|b|c|d|f|g|.............|
+^            ^            ^
+elements     first_free   cap
+
+// if use alloc.construct(++first_free, "g");
+|a|b|c|d|f|.|g|............|
+^          ^ ^             ^
+elements   | first_free    cap
+           |
+    "unconstructed"
+```  
+
+#### 13.42 Test your StrVec class by using it in place of the vector<string> in your TextQuery and QueryResult classes (§ 12.3, p. 484).  
+
+[ex13_42_StrVec.h](./ex13_42_StrVec.h)  
+[ex13_42_StrVec.cpp](./ex13_42_StrVec.cpp)  
+[ex13_42_TextQuery.h](./ex13_42_TextQuery.h)  
+[ex13_42_TextQuery.cpp](./ex13_42_TextQuery.cpp)  
+[ex13_42.cpp](./ex13_42.cpp)  
+
+
+
+```
+➜  ch13 git:(master) ✗ g++ ex13_42.cpp ex13_42_TextQuery.cpp ex13_42_StrVec.cpp
+➜  ch13 git:(master) ✗ ./a.out
+enter word to look for, or q to quit: bird
+bird occurs 2 times
+        (line 4) like a fiery bird in flight. 
+        (line 5) A beautiful fiery bird, he tells her, 
+
+enter word to look for, or q to quit: q
+```  
+
+#### 13.43 Rewrite the free member to use for_each and a lambda (§ 10.3.2, p. 388) in place of the for loop to destroy the elements. Which implementation do you prefer, and why?  
+
+```cpp
+for_each(elements, first_free, [this](std::string &rhs){ alloc.destroy(&rhs); });
+```
+
+> We need not worry about the order, so the lambda edition is better.  
+
+#### 13.44 Write a class named String that is a simplified version of the library string class. Your class should have at least a default constructor and a constructor that takes a pointer to a C-style string. Use an allocator to allocate memory that your String class uses.  
+
+[ex13_44.h](./ex13_44.h)  
+[ex13_44.cpp](./ex13_44.cpp)  
+[ex13_44_test.cpp](./ex13_44_test.cpp)  
+
+```
+➜  ch13 git:(master) ✗ g++ ex13_44_test.cpp ex13_44.cpp
+➜  ch13 git:(master) ✗ ./a.out
+copy constructor
+copy constructor
+copy-assignment
+copy constructor
+hello
+hello
+temporary
+temporary
+copy constructor
+copy constructor
+copy constructor
+copy constructor
+copy constructor
+copy constructor
+copy constructor
+copy constructor
+
+hello
+hello
+hello
+world
+world
+world
+good job
+```
 
 
