@@ -13,19 +13,19 @@
 - [Chapter 7 Classes](./ex/ch07/readme.md)
 
 ### PART II - The C++ Library
-+ [Chapter 8 The IO Library](./ex/ch08/readme.md)  
-+ [Chapter 9 Sequential Containers](./ex/ch09/readme.md)  
-+ [Chapter 10 Generic Algorithm](./ex/ch10/readme.md)  
-+ [Chapter 11 Associative Containers](./ex/ch11/readme.md)  
-+ [Chapter 12 Dynamic Memory](./ex/ch12/readme.md)  
+- [Chapter 8 The IO Library](./ex/ch08/readme.md)  
+- [Chapter 9 Sequential Containers](./ex/ch09/readme.md)  
+- [Chapter 10 Generic Algorithm](./ex/ch10/readme.md)  
+- [Chapter 11 Associative Containers](./ex/ch11/readme.md)  
+- [Chapter 12 Dynamic Memory](./ex/ch12/readme.md)  
 
 ### PART III - Tools for Class Authors  
-
-+ [Chapter 13 Copy Control](./ex/ch13/readme.md)  
+- [Chapter 13 Copy Control](./ex/ch13/readme.md)  
 ### PART IV - Advanced Topics
 
 ---
 
 ## [Effective C++](./effective/old)  
+- [Item 7 Declare destructors virtual in polymorphic base classes.](./effective/old/item7/readme.md)
 ## [C++ Concurrency in Action](./concurrency)
 
