@@ -6,7 +6,7 @@
 
 [value-like-HasPtr](./ex13_22.h)  
 [pointer-like-HasPtr](./ex13_27.h)   
-
+[static](./static.cpp)  
 
 ## Exercise  
 
@@ -540,4 +540,303 @@ world
 good job
 ```
 
+#### 13.45 Distinguish between an rvalue reference and an lvalue reference.  
 
+> Definition：
+
++ lvalue reference: reference that can bind to an lvalue. (Regular reference)
++ rvalue reference: reference to an object that is about to be destroyed.
+
+
+```cpp
+int i = 42;
+int &r = i; // lvalue reference
+int &&rr = i; // rvalue reference (Error: i is a lvalue)
+int &r2 = i*42; // lvalue reference (Error: i*42 is a rvalue)
+const int &r3 = i*42; // reference to const (bind to a rvalue)
+int &&rr2 = i*42; // rvalue reference
+``` 
+
+#### 13.46 Which kind of reference can be bound to the following initializers?  
+
+```cpp
+int f();// 
+vector<int> vi(100); //
+int&& r1 = f(); //&&
+int& r2 = vi[0];//&
+int& r3 = r1;//&
+int&& r4 = vi[0] * f();//&&
+```  
+
+#### 13.47 Give the copy constructor and copy-assignment operator in your String class from exercise 13.44 in § 13.5 (p. 531) a statement that prints a message each time the function is executed.  
+
+> see [ex13_44.cpp](./ex13_44.cpp)  
+
+```cpp
+String::String(const String& rhs)
+{
+    range_initializer(rhs.elements, rhs.end);
+    std::cout << "copy constructor" << std::endl;
+}
+```  
+
+```cpp
+String& String::operator=(const String& rhs)
+{
+    auto newstr = alloc_n_copy(rhs.elements, rhs.end);
+    free();
+    elements = newstr.first;
+    end = newstr.second;
+    std::cout << "copy-assignment" << std::endl;
+    return *this;
+}
+```  
+
+#### 13.48 Define a vector<String> and call push_back several times on that vector. Run your program and see how often Strings are copied.  
+
+```
+➜  ch13 git:(master) ✗ g++ ex13_48.cpp ex13_44.cpp
+➜  ch13 git:(master) ✗ ./a.out
+copy constructor
+copy constructor
+copy-assignment
+copy constructor
+hello
+hello
+temporary
+temporary
+copy constructor
+copy constructor
+copy constructor
+copy constructor
+copy constructor
+copy constructor
+copy constructor
+copy constructor
+
+hello
+hello
+hello
+world
+world
+world
+good job
+```  
+
+#### 13.49 Add a move constructor and move-assignment operator to your StrVec, String, and Message classes.  
+
+[ex13_49_StrVec.h](./ex13_49_StrVec.h)    
+[ex13_49_StrVec.cpp](./ex13_49_StrVec.cpp)  
+```cpp
+//StrVec  
+StrVec::StrVec(StrVec&& s) NOEXCEPT : elements(s.elements),
+                                      first_free(s.first_free),
+                                      cap(s.cap)
+{
+    // leave s in a state in which it is safe to run the destructor.
+    s.elements = s.first_free = s.cap = nullptr;
+}
+
+StrVec& StrVec::operator=(StrVec&& rhs) NOEXCEPT
+{
+    if (this != &rhs) {
+        free();
+        elements = rhs.elements;
+        first_free = rhs.first_free;
+        cap = rhs.cap;
+        rhs.elements = rhs.first_free = rhs.cap = nullptr;
+    }
+    return *this;
+}
+```
+[ex13_49_String.h](./ex13_49_String.h)  
+[ex13_49_String.cpp](./ex13_49_String.cpp)    
+```cpp
+//String
+String::String(String&& s) NOEXCEPT : elements(s.elements), end(s.end)
+{
+    s.elements = s.end = nullptr;
+}
+
+String& String::operator=(String&& rhs) NOEXCEPT
+{
+    if (this != &rhs) {
+        free();
+        elements = rhs.elements;
+        end = rhs.end;
+        rhs.elements = rhs.end = nullptr;
+    }
+    return *this;
+}
+```
+
+[ex13_49_Message.h](./ex13_49_Message.h)  
+[ex13_49_Message.cpp](./ex13_49_Message.cpp)  
+```cpp
+//Message
+Folder::Folder(Folder&& f)
+{
+    move_Messages(&f);
+}
+
+Folder& Folder::operator=(Folder&& f)
+{
+    if (this != &f) {
+        remove_from_Messages();
+        move_Messages(&f);
+    }
+    return *this;
+}
+```
+[ex13_49_Message_Test.cpp](./ex13_49_Message_Test.cpp)  
+
+
+```
+➜  ch13 git:(master) ✗ g++ ex13_49_Message_Test.cpp ex13_49_Message.cpp
+➜  ch13 git:(master) ✗ ./a.out
+hello welcome to cppprimer 
+welcome to cppprimer 
+```  
+
+#### 13.50 Put print statements in the move operations in your String class and rerun the program from exercise 13.48 in § 13.6.1 (p. 534) that used a vector<String> to see when the copies are avoided.  
+
+```cpp
+String baz()
+{
+    String ret("world");
+    return ret;//avoid here
+}
+
+String s5 = baz();//avoid here
+```
+
+[ex13_50.cpp](./ex13_50.cpp)  
+
+```
+➜  ch13 git:(master) ✗ g++ ex13_50.cpp ex13_49_String.cpp          
+➜  ch13 git:(master) ✗ ./a.out
+copy-construcor
+copy-construcor
+copy-assignment
+copy-construcor
+hello
+hello
+temporary
+temporary
+move-assignment
+copy-construcor
+copy-construcor
+copy-construcor
+copy-construcor
+copy-construcor
+copy-construcor
+move-constructor
+move-constructor
+
+hello
+hello
+hello
+world
+world
+world
+good job
+```
+
+```cpp
+char text[] = "world";
+
+String s0;
+String s1("hello");
+String s2(s0);//copy-construcor
+String s3 = s1;//copy-construcor
+String s4(text);
+s2 = s1;//copy-assignment
+
+foo(s1);//copy-construcor, hello
+bar(s1);//hello
+foo("temporary");//temporary
+bar("temporary");//temporary
+String s5 = baz();//avoid copy
+s5 = baz();//move assignment  
+
+std::vector<String> svec;
+svec.reserve(8);
+svec.push_back(s0);//copy-construcor
+svec.push_back(s1);//copy-construcor
+svec.push_back(s2);//copy-construcor
+svec.push_back(s3);//copy-construcor
+svec.push_back(s4);//copy-construcor
+svec.push_back(s5);//copy-construcor
+svec.push_back(baz());//move-construcor
+svec.push_back("good job");//move-constructor
+```  
+
+#### 13.51 Although unique_ptrs cannot be copied, in § 12.1.5 (p. 471) we wrote a clone function that returned a unique_ptr by value. Explain why that function is legal and how it works.  
+
+> In the second assignment, we assign from the result of a call to getVec. That expression is an rvalue. In this case, both assignment operators are viable—we can bind the result of getVec to either operator’s parameter. Calling the copy-assignment operator requires a conversion to const, whereas StrVec&& is an exact match. Hence, the second assignment uses the move-assignment operator.  
+
+```cpp
+unique_ptr<int> clone(int p) {
+    // ok: explicitly create a unique_ptr<int> from int*
+    return unique_ptr<int>(new int(p));
+}
+
+```  
+
+> the result of a call to clone is an rvalue, so it uses the move-assignment operator rather than copy-assignment operator. Thus, it is legal and can pretty work.
+
+#### 13.52 Explain in detail what happens in the assignments of the HasPtr objects on page 541. In particular, describe step by step what happens to values of hp, hp2, and of the rhs parameter in the HasPtr assignment operator.  
+
+> Thus, in hp = hp2;, hp2 is an lvalue, copy constructor used to copy hp2. In hp = std::move(hp2);, move constructor moves hp2.  
+
+#### 13.53 As a matter of low-level efficiency, the HasPtr assignment operator is not ideal. Explain why. Implement a copy-assignment and move-assignment operator for HasPtr and compare the operations executed in your new move-assignment operator versus the copy-and-swap version.  
+
+[ex13_53.h](./ex13_53.h)  
+[ex13_53.cpp](./ex13_53.cpp)  
+
+#### 13.54 What would happen if we defined a HasPtr move-assignment operator but did not change the copy-and-swap operator? Write code to test your answer.  
+
+```
+error: ambiguous overload for 'operator=' (operand types are 'HasPtr' and 'std::remove_reference<HasPtr&>::type {aka HasPtr}')
+hp1 = std::move(*pH);
+^
+```  
+
+#### 13.55 Add an rvalue reference version of push_back to your StrBlob.
+
+```cpp
+void push_back(string &&s) { data->push_back(std::move(s)); }
+```  
+
+#### 13.56 What would happen if we defined sorted as:  
+
+```cpp
+Foo Foo::sorted() const & {
+    Foo ret(*this);
+    return ret.sorted();
+}
+```  
+
+recursion and stack overflow.
+
+> Because the local variable ret here is an lvalue, so when we call ret.sorted(), we are actually not calling the member function Foo Foo::sorted() && as expected, but Foo Foo::sorted() const & instead. As a result, the code will be trapped into a recursion and causes a deadly stack overflow.
+
+#### 13.57 What if we defined sorted as:  
+
+```cpp
+Foo Foo::sorted() const & { return Foo(*this).sorted(); }
+```  
+
+> OK, it will call the move version.  
+
+#### 13.58 Write versions of class Foo with print statements in their sorted functions to test your answers to the previous two exercises.  
+
+[ex13_58.cpp](./ex13_58.cpp)  
+
+```
+➜  ch13 git:(master) ✗ g++ ex13_58.cpp
+➜  ch13 git:(master) ✗ ./a.out
+&&
+const &
+&&
+```
