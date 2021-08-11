@@ -1,4 +1,4 @@
-#include "14_2.h"
+#include "ex14_45_sales_data.h"
 
 Sales_data::Sales_data(std::istream& is) : Sales_data()
 {
@@ -36,9 +36,9 @@ Sales_data operator+(const Sales_data& lhs, const Sales_data& rhs)
     sum += rhs;
     return sum;
 }
-int main()
+
+Sales_data& Sales_data::operator=(const std::string& isbn)
 {
-    Sales_data cp5;
-    std::cin >> cp5;
-    std::cout << cp5 << std::endl;
+    *this = Sales_data(isbn);
+    return *this;
 }
