@@ -2,6 +2,12 @@
 
 ## C++ Primer
 
+### Reference  
+
++ [pezy/CppPrimer](https://github.com/pezy/CppPrimer)  
+
+
+
 - [Chapter 1 Getting Started](./ex/ch01/readme.md) 
 
 ### PART I - The Basics
