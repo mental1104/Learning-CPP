@@ -22,6 +22,8 @@
 ### PART III - Tools for Class Authors  
 - [Chapter 13 Copy Control](./ex/ch13/readme.md)  
 - [Chapter 14 Overloaded Operations and Conversions](./ex/ch14/readme.md)
+- [Chapter 15 Object-Oriented-Programming](./ex/ch15/readme.md)  
+
 ### PART IV - Advanced Topics
 
 ---

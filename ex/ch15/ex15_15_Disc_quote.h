@@ -1,7 +1,7 @@
 #ifndef CP5_EX15_15_DISC_QUOTE_H_
 #define CP5_EX15_15_DISC_QUOTE_H_
 
-#include "15_3(Quote).h"
+#include "ex15_03_Quote.h"
 #include <string>
 
 inline namespace EX15 {

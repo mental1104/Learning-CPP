@@ -1,7 +1,7 @@
 #ifndef CP5_EX15_15_BULK_QUOTE_H_
 #define CP5_EX15_15_BULK_QUOTE_H_
 
-#include "15_15.h"
+#include "ex15_15_Disc_quote.h"
 #include <string>
 
 inline namespace EX15 {
@@ -19,3 +19,5 @@ public:
 };
 
 }
+
+#endif // CP5_EX15_15_BULK_QUOTE_H_
