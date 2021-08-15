@@ -322,3 +322,35 @@ total in the vector: 325
 [ex15_30_Basket.h](./ex15_30_Basket.h)  
 [ex15_30_Quote_Bulk_quote.h](./ex15_30_Quote_Bulk_quote.h)  
 
+#### 15.31 Given that s1, s2, s3, and s4 are all strings, determine what objects are created in the following expressions:  
+
+```
+(a) Query(s1) | Query(s2) & ~ Query(s3);
+
+(b) Query(s1) | (Query(s2) & ~ Query(s3));
+
+(c) (Query(s1) & (Query(s2)) | (Query(s3) & Query(s4)));
+
+(a): WordQuery -> NotQuery -> AndQuery -> OrQuery
+
+(b): WordQuery -> NotQuery -> AndQuery -> OrQuery (same as the previous one)
+
+(c): WordQuery -> AndQuery -> OrQuery
+```
+
+#### 15.32 What happens when an object of type Query is copied, moved, assigned, and destroyed?  
+
+- **copy**: While being copied, the synthesized copy constructor is called. It copies the data member into the new object. Since in this case, the data member is a shared pointer, while copying, the corresponding shared pointer points to the same address and the use count from the both shared pointer becomes 2.
+
+- **move**: while being moved, the synthesized move constructor is called. It moves the data member into the new object. In this case, the shared pointer from the newly created object will point to the address to which the original shared pointer pointed. After the move operation, the use count of the shared pointer in the new object is 1, whereas the pointer from the original object becomes `nullptr`.
+
+- **copy assignment**: The synthesized copy assignment will be called. The outcome of this operation is identical with the copy operation.
+
+- **move assignment**: The synthesized move assignment will be called. The rest is the same as the move operation.
+
+- **destroy**: The synthesized destructor will be called. It will call the destructor of `shared_ptr` which decrements the use count. If the count becomes zero, the destructor from `shared_ptr` will delete the resources it point to.
+
+
+#### 15.33 What about objects of type Query_base?  
+
+> Managed by the synthesized version. Since `Query_base` a abstract class, the object of this type is essentially a sub-object of its derived class.  
