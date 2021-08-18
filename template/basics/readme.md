@@ -34,5 +34,13 @@ max3ref.cpp:16:15: warning: returning reference to temporary [-Wreturn-local-add
 [1]    4044 segmentation fault (core dumped)  ./a.out
 ```
 
+[max4.cpp](./max4.cpp)
 
+`g++ max4.cpp`  
+`./a.out`  
+
+```
+max<T>() 
+max<T>() 
+```
 
