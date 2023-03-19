@@ -1,4 +1,4 @@
-#include "./ex2_42_sales_data.h" 
+#include "ex2_42_sales_data.h" 
 
 int main(){
     Sales_data book;
