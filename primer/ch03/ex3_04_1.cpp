@@ -9,6 +9,6 @@ int main(){
     if(s1 > s2)
         cout << s1 << endl;
     else
-        cout <<s2 << endl;
+        cout << s2 << endl;
     return 0;
 }
