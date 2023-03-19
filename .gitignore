@@ -1,3 +1,4 @@
 # dir 不需要提交的目录
 /build
 /.vscode
+*/a.out
