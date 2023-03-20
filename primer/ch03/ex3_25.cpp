@@ -7,12 +7,12 @@ int main(){
     vector<unsigned> scores(11,0);
     unsigned grade;
     auto i = scores.begin();
-    while(cin>>grade)
+    while(cin >> grade)
         if(grade<=100)
             ++*(i+grade/10);
 
     for(auto i:scores)
-        cout<< i << " ";
-    cout<<endl;
+        cout << i << " ";
+    cout <<endl;
     return 0;
 }
