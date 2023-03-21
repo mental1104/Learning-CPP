@@ -11,7 +11,7 @@ int main(){
     int a = 50, b =100;
     int* pa = &a;
     int* pb = &b;
-    exch(pa,pb);
+    exch(pa, pb);
     cout << a << " " << b << endl;
     return 0;
 }

@@ -32,10 +32,10 @@ int main(){
     vec.push_back(pdivi);
 
     int a =10, b =2;
-    cout<<vec[0](a,b)<<endl;
-    cout<<vec[1](a,b)<<endl;
-    cout<<vec[2](a,b)<<endl;
-    cout<<vec[3](a,b)<<endl;
+    cout << vec[0](a,b) << endl;
+    cout << vec[1](a,b) << endl;
+    cout << vec[2](a,b) << endl;
+    cout << vec[3](a,b) << endl;
 
     return 0;
 

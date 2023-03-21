@@ -4,9 +4,9 @@
 using namespace::std;
 
 void print(vector<int>& a, vector<int>::iterator iter){
-   if(iter!=a.end()){
-      cout<<*iter<<" ";
-      print(a,++iter);
+   if(iter != a.end()){
+      cout<< *iter << " ";
+      print(a, ++iter);
    }
 }
 

@@ -12,7 +12,7 @@ bool hasUpper(const string& s){
 
 void toLower(string& s){
     for(auto& i:s)
-        i|=0x20;
+        i |= 0x20;
 }
 
 int main(){
