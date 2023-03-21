@@ -1,0 +1,12 @@
+include_directories(${PRIMER}/ch02)
+
+add_executable(EX7_01 ex7_01.cpp)
+add_executable(EX7_03 ex7_03.cpp)
+add_executable(EX7_07 ex7_07.cpp)
+add_executable(EX7_11 ex7_11_sales_data.cpp)
+add_executable(EX7_13 ex7_13.cpp)
+add_executable(EX7_27 ex7_27.cpp)
+add_executable(EX7_29 ex7_29.cpp)
+add_executable(EX7_41 ex7_41_sales_data_test.cpp ex7_41_sales_data.cpp)
+add_executable(EX7_48 ex7_48.cpp)
+add_executable(EX7_55 ex7_55.cpp)
