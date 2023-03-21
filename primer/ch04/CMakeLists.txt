@@ -1,0 +1,5 @@
+add_executable(EX4_20 ex4_20.cpp)
+add_executable(EX4_21 ex4_21.cpp)
+add_executable(EX4_22 ex4_22.cpp)
+add_executable(EX4_28 ex4_28.cpp)
+add_executable(EX4_29 ex4_29.cpp)
