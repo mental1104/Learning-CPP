@@ -10,19 +10,19 @@ int main(){
     deque<int> even;
     auto iter = li.begin();
     while(iter!=li.end()){
-        if(*iter%2 ==0)
+        if(*iter % 2 ==0)
             even.push_back(*iter);
         else
             odd.push_back(*iter);
         iter++;
     }
-    for(auto i:odd)
-        cout<< i << " ";
-    cout<<endl;
+    for(auto i: odd)
+        cout << i << " ";
+    cout << endl;
 
-    for(auto i:even)
-        cout<< i << " ";
-    cout<<endl;
+    for(auto i: even)
+        cout << i << " ";
+    cout << endl;
 
     return 0;
 }

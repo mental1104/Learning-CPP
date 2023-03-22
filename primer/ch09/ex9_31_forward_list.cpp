@@ -6,7 +6,7 @@ using std::cout;
 using std::advance;
 using std::endl;
 
-auto remove_evens_and_double_odds(forward_list<int>& data)
+void remove_evens_and_double_odds(forward_list<int>& data)
 {
     for(auto cur = data.begin(), prv = data.before_begin(); cur != data.end();)
         if (*cur & 0x1)

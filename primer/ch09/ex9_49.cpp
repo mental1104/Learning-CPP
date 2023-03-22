@@ -6,7 +6,7 @@ using std::string; using std::cout; using std::endl; using std::ifstream;
 
 int main()
 {
-    ifstream ifs("./letter.txt");
+    ifstream ifs("letter.txt");
     if (!ifs) return -1;
 
     string longest;

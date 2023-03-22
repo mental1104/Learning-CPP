@@ -14,8 +14,8 @@ void func(forward_list<string>& li,const string a,const string b){
 
 }
 int main(){
-    forward_list<string> f = {"Vergil","will","cry"};
-    func(f,"will","not");
+    forward_list<string> f = {"Vergil", "will", "cry"};
+    func(f, "will", "not");
     for(auto i:f)
         cout << i << " ";
     cout << endl;

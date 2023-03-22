@@ -8,8 +8,8 @@ int main(){
     auto prev = fli.before_begin();
     auto curr = fli.begin();
 
-    while(curr!=fli.end()){
-        if(*curr&0x1)
+    while(curr != fli.end()){
+        if(*curr & 0x1)
             curr = fli.erase_after(prev);
         else{
             prev = curr;
@@ -17,7 +17,7 @@ int main(){
         } 
     }
 
-    for(auto i:fli)
+    for(auto i : fli)
         cout << i << " ";
     cout << endl;
     return 0;
