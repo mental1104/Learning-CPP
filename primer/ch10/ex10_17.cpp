@@ -1,7 +1,7 @@
 #include <algorithm>
 #include <vector>
 
-#include "../ch07/ex7_26_sales_data.h" // Sales_data class.
+#include "ex7_26_sales_data.h" // Sales_data class.
 
 int main()
 {

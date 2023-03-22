@@ -3,7 +3,7 @@
 #include <algorithm>
 #include <iterator>
 #include <numeric>
-#include "../ch01/Sales_item.h"
+#include "Sales_item.h"
 
 int main()
 {

@@ -2,7 +2,7 @@
 #include <numeric>
 #include <vector>
 
-#include "../ch07/ex7_26_sales_data.h" // Sales_data class.
+#include "ex7_26_sales_data.h" // Sales_data class.
 
 bool compareIsbn(const Sales_data& sd1, const Sales_data& sd2)
 {
