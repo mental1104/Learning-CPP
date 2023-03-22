@@ -17,7 +17,7 @@ void wordCounting()
 
 void wordTransformation()
 {
-    std::ifstream ifs_map("./word_transformation.txt"), ifs_content("./given_to_transform.txt");
+    std::ifstream ifs_map("word_transformation.txt"), ifs_content("given_to_transform.txt");
     if (!ifs_map || !ifs_content) {
         std::cerr << "can't find the documents." << std::endl;
         return;

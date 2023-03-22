@@ -1,4 +1,4 @@
-#include "../ch07/ex7_26_sales_data.h"
+#include "ex7_26_sales_data.h"
 #include <set>
 
 auto less(Sales_data const& lhs, Sales_data const& rhs)
