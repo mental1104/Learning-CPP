@@ -32,7 +32,7 @@ string format(const string& str)
 
 int main()
 {
-    ifstream ifs("./phonenumbers.txt");
+    ifstream ifs("phonenumbers.txt");
     if (!ifs) {
         cerr << "no phone numbers?" << endl;
         return -1;

@@ -1,6 +1,6 @@
 #include <fstream>
 
-#include "../ch07/ex7_26_sales_data.h"
+#include "ex7_26_sales_data.h"
 
 int main(int argc, char** argv)
 {

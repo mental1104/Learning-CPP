@@ -13,8 +13,8 @@ int main(){
         devil.push_back(str);
     }
 
-    for(auto s:devil)
-        cout<<s<<endl;
+    for(auto s : devil)
+        cout << s << endl;
     return 0;
 }
 
