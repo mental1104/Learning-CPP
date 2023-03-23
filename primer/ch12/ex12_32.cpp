@@ -8,7 +8,7 @@
 //  Rewrite the TextQuery and QueryResult classes to use a StrBlob
 //  instead of a vector<string> to hold the input file.
 
-#include "./ex12_32.h"
+#include "ex12_32.h"
 #include <sstream>
 #include <fstream>
 #include <algorithm>

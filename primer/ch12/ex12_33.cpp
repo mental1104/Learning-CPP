@@ -1,5 +1,6 @@
 #include "ex12_33.h"
 #include <sstream>
+#include <fstream>
 #include <algorithm>
 
 TextQuery::TextQuery(std::ifstream& ifs) : input(new StrBlob)
@@ -41,4 +42,23 @@ std::ostream& print(std::ostream& out, const QueryResult& qr)
         out << "\t(line " << *it + 1 << ") " << p.deref() << std::endl;
     }
     return out;
+}
+
+void runQueries(std::ifstream &infile)
+{
+    TextQuery tq(infile);
+
+    while(true) {
+        std::cout << "enter word to look for, or q to quit: ";
+        string s;
+
+        if(!(std::cin >> s) || s == "q") break;
+        print(std::cout, tq.query(s)) << std::endl;
+    }
+}
+
+int main(){
+    std::ifstream ifs("ex12_20.txt");
+    runQueries(ifs);
+    return 0;
 }

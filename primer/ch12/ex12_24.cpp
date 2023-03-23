@@ -12,5 +12,6 @@ int main(){
     strcpy(c,s.c_str());
 
     printf("%s\n",c);
+    delete[] c;
     return 0;
 }

@@ -1,0 +1,18 @@
+add_executable(Query Query.cpp)
+
+add_executable(EX12_02 ex12_02.cpp)
+add_executable(EX12_06 ex12_06.cpp)
+add_executable(EX12_07 ex12_07.cpp)
+add_executable(EX12_14 ex12_14.cpp)
+add_executable(EX12_15 ex12_15.cpp)
+file(COPY ${PROJECT_SOURCE_DIR}/primer/ch12/ex12_20.txt
+     DESTINATION ${PROJECT_BINARY_DIR}/primer/ch12/)
+add_executable(EX12_20 ex12_20.cpp)
+add_executable(EX12_22 ex12_22.cpp)
+add_executable(EX12_23a ex12_23a.cpp)
+add_executable(EX12_23b ex12_23b.cpp)
+add_executable(EX12_24 ex12_24.cpp)
+add_executable(EX12_26 ex12_26.cpp)
+add_executable(EX12_28 ex12_28.cpp)
+add_executable(EX12_32 ex12_32.cpp)
+add_executable(EX12_33 ex12_33.cpp)
