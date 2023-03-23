@@ -14,7 +14,7 @@ using std::initializer_list;
 using std::make_shared;
 using std::shared_ptr;
 
-#include <exception>
+#include <stdexcept>
 
 #ifndef _MSC_VER
 #define NOEXCEPT noexcept

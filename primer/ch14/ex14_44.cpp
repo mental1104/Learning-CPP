@@ -45,7 +45,7 @@ std::map<std::string, std::function<int(int, int)>> binops = {
 int main()
 {
     while (true) {
-        std::cout << "\npleasr enter: num operator num :\n";
+        std::cout << "\nplease enter: num operator num :\n";
         int n1, n2;
         std::string s;
         std::cin >> n1 >> s >> n2;
