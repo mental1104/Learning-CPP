@@ -16,9 +16,7 @@ int main(){
     BetterFilter bf;
     {
         
-        ColorSpecification green(Color::Green);
-
-        auto green_things = bf.filter(all, std::move(green));
+        auto green_things = bf.filter(all, ColorSpecification(Color::Green));
         for(auto& x : green_things)
             cout << x->name << " is green" << endl;
     }
@@ -28,6 +26,7 @@ int main(){
         SizeSpecification large(Size::Large);
         ColorSpecification green(Color::Green);
         AndSpecification<Product> green_and_large{large, green};
+
         auto big_green_things = bf.filter(all, std::move(green_and_large));
         for(auto& x : big_green_things){
             cout << x->name << " is large and green" << endl;
@@ -44,6 +43,5 @@ int main(){
         }
     }
     
-
     return 0;
 }
