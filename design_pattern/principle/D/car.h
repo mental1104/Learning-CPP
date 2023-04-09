@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <memory>
+#include "ilogger.h"
 #include "engine.h"
 
 using std::ostream;
