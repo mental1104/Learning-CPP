@@ -10,7 +10,7 @@ struct Filter
 {
     virtual vector<T*> filter(
         vector<T*> items,
-        Specification<T>& spec
+        Specification<T>&& spec
     ) const = 0;
 };
 
@@ -18,7 +18,7 @@ struct BetterFilter : Filter<Product>
 {
     vector<Product*> filter(
         vector<Product*> items,
-        Specification<Product>& spec
+        Specification<Product>&& spec
     ) const override {
         vector<Product*> result;
         for(auto& p : items)

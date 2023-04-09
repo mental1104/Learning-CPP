@@ -2,20 +2,20 @@
 
 #include <string>
 using std::string;
-#include <iostream>
-using namespace::std;
 
 template<typename T>
 struct AndSpecification;
 
 enum class Color { Red, Green, Blue };
 enum class Size { Small, Medium, Large };
+enum class Feature { Less, Normal, More};
 
 struct Product
 {
     string name;
     Color color;
     Size size;
+    Feature feature;
 };
 
 
@@ -24,7 +24,7 @@ struct Specification
 {
     virtual bool is_satisfied(T* item) = 0;
 
-    AndSpecification<T> operator &&(Specification& other)
+    AndSpecification<T> operator&& (Specification& other)
     {
         return AndSpecification<T>(*this, other);
     }
@@ -52,6 +52,17 @@ struct SizeSpecification : Specification<Product>
     }
 };
 
+struct FeatureSpecification : Specification<Product>
+{
+    Feature feature;
+
+    explicit FeatureSpecification(const Feature feature) : feature{feature} {}
+
+    bool is_satisfied(Product* item) override {
+        return item->feature == feature;
+    }
+};
+
 template<typename T>
 struct AndSpecification : Specification<T>
 {
@@ -61,7 +72,6 @@ struct AndSpecification : Specification<T>
     AndSpecification(Specification<T>& first,
                      Specification<T>& second)
     : first{first}, second{second} {}
-    
 
     bool is_satisfied(T* item) override
     {
