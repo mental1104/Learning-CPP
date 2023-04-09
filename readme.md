@@ -52,8 +52,8 @@ Download Boost:
 
 `sudo apt-get install libboost-all-dev`  
 
-use boost::ext::di: 
-`cd /usr/include/boost`  
+use boost::ext::di:  
+`cd /usr/include/boost`    
 `wget https://raw.githubusercontent.com/boost-ext/di/cpp14/include/boost/di.hpp`  
 
 Document:
