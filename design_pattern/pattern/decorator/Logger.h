@@ -64,3 +64,28 @@ auto make_logger3(R (*func)(Args...), const string & name) {
             function<R(Args...)>(func), name);
 }
 
+template<typename Func>
+struct Logger4 {
+    Logger4(Func func) : func{std::move(func)} {};
+
+    template<typename... Args>
+    decltype(auto) operator() (Args&&... args) {
+        cout << "Entering function" << endl;
+        if constexpr (std::is_void_v<decltype(func(std::forward<Args>(args)...))>) {
+            func(std::forward<Args>(args)...);
+            cout << "Exiting function\n";
+            return;
+        } else {
+            auto result = func(std::forward<Args>(args)...);
+            cout << "Exiting function\n";
+            return result;
+        }
+    }
+
+    Func func;
+};
+
+template<typename Func>
+auto make_logger4(Func func) {
+    return Logger4<Func>(std::move(func));
+}
