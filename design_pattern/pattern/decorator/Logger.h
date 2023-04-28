@@ -2,6 +2,7 @@
 #include <functional>
 #include <utility>
 #include <string>
+#include <type_traits>
 
 using std::cout;
 using std::endl;
