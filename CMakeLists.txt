@@ -3,8 +3,8 @@ project(CPP CXX)
 
 set(CMAKE_C_COMPILER "which gcc")
 set(CMAKE_CXX_COMPILE_FEATURES "which g++")
-set(CMAKE_CXX_STANDARD 20)
 set(TOP_DIR ${CMAKE_CURRENT_LIST_DIR}/)
 set(PRIMER ${CMAKE_CURRENT_LIST_DIR}/primer)
 
 add_subdirectory(primer)
+add_subdirectory(design_pattern)
