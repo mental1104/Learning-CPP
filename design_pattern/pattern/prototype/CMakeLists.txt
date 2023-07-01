@@ -1,3 +1,0 @@
-add_executable(contact_copy contact_copy.cpp)
-add_executable(employee_factory employee_factory.cpp)
-add_executable(extended_address extended_address.cpp)

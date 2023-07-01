@@ -1,1 +1,0 @@
-add_executable(ocp open_closed.cpp)

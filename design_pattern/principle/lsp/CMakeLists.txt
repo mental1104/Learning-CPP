@@ -1,1 +1,0 @@
-add_executable(lsp liskov_substitution.cpp)
